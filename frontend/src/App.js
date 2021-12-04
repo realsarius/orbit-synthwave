@@ -13,6 +13,7 @@ import AddReview from "./components/add-review";
 import Restaurant from "./components/restaurants"
 import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
+import OurPartners from "./components/OurPartners";
 
 const App = () => {
     const [user, setUser] = React.useState(null);
@@ -112,17 +113,24 @@ const App = () => {
                                 <Restaurant {...props} user={user}/>
                             )}
                         />
-                        <Route
-                            path="/login"
-                            render={(props) => (
-                                <Login {...props} login={login}/>
-                            )}
-                        />
+                        {/*<Route*/}
+                        {/*    path="/login"*/}
+                        {/*    render={(props) => (*/}
+                        {/*        <Login {...props} login={login}/>*/}
+                        {/*    )}*/}
+                        {/*/>*/}
                     </Switch>
                 </div>
             )}/>
+            {/*<Route path={'/restaurants'} component={RestaurantsList}/>*/}
+            <Route
+                path="/login"
+                render={(props) => (
+                    <Login {...props} login={login}/>
+                )}
+            />
             <Route path={'/about'} component={About}/>
-            <Route path={'/login'} component={Login}/>
+            <Route path={'/our-partners'} component={OurPartners}/>
             <Footer/>
         </div>
     );
