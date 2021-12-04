@@ -78,7 +78,7 @@ const RestaurantsList = props => {
     };
 
     const findByCuisine = () => {
-        if (searchCuisine == "All Cuisines") {
+        if (searchCuisine === "All Cuisines") {
             refreshList();
         } else {
             find(searchCuisine, "cuisine")
@@ -86,45 +86,26 @@ const RestaurantsList = props => {
     };
 
     return (
-        <div>
-            <div className="row pb-1">
+        <div className={'pt-5'}>
+            <h1 className={'pt-5 text-center'}>Restaurants</h1>
+            <div className="row pb-1 pt-5">
                 <div className="input-group col-lg-4">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search by name"
-                        value={searchName}
-                        onChange={onChangeSearchName}
-                    />
+                    <input type="text" className="form-control" placeholder="Search by name" value={searchName}
+                           onChange={onChangeSearchName}/>
                     <div className="input-group-append">
-                        <button
-                            className="btn btn-outline-secondary"
-                            type="button"
-                            onClick={findByName}
-                        >
+                        <button className="btn btn-outline-secondary" type="button" onClick={findByName}>Search</button>
+                    </div>
+                </div>
+                <div className="input-group col-lg-4 pt-3">
+                    <input type="text" className="form-control" placeholder="Search by zip" value={searchZip}
+                           onChange={onChangeSearchZip}/>
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-secondary" type="button" onClick={findByZip}>
                             Search
                         </button>
                     </div>
                 </div>
-                <div className="input-group col-lg-4">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search by zip"
-                        value={searchZip}
-                        onChange={onChangeSearchZip}
-                    />
-                    <div className="input-group-append">
-                        <button
-                            className="btn btn-outline-secondary"
-                            type="button"
-                            onClick={findByZip}
-                        >
-                            Search
-                        </button>
-                    </div>
-                </div>
-                <div className="input-group col-lg-4">
+                <div className="input-group col-lg-4 pt-3">
 
                     <select onChange={onChangeSearchCuisine}>
                         {cuisines.map(cuisine => {
@@ -134,20 +115,16 @@ const RestaurantsList = props => {
                         })}
                     </select>
                     <div className="input-group-append">
-                        <button
-                            className="btn btn-outline-secondary"
-                            type="button"
-                            onClick={findByCuisine}
-                        >
+                        <button className="btn btn-outline-secondary" type="button" onClick={findByCuisine}>
                             Search
                         </button>
                     </div>
 
                 </div>
             </div>
-            <div className="row">
+            <div className="row pt-3">
                 {restaurants.map((restaurant) => {
-                    const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
+                    const address = `${restaurant.address.building} ${restaurant.address.streetView}, ${restaurant.address.zipcode}`;
                     return (
                         <div className="col-lg-4 pb-1">
                             <div className="card">
