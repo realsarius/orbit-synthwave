@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Header from "./components/Header";
 import Introduction from "./components/Introduction";
 // import NavBar from "./components/NavBar";
@@ -12,8 +12,16 @@ import Services from "./components/Services";
 import AddReview from "./components/add-review";
 import Restaurant from "./components/restaurants"
 import RestaurantsList from "./components/restaurants-list";
-import Login from "./components/login";
 import OurPartners from "./components/OurPartners";
+import {AuthProvider} from './context/AuthProvider';
+import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./components/Dashboard";
+import UpdateProfile from "./components/UpdateProfile";
+import Signup from "./components/Signup";
+import ForgotPassword from "./components/ForgotPassword";
+import Login from "./components/Login";
+import {Container} from "react-bootstrap";
+
 
 const App = () => {
     const [user, setUser] = React.useState(null);
@@ -122,15 +130,23 @@ const App = () => {
                     </Switch>
                 </div>
             )}/>
-            {/*<Route path={'/restaurants'} component={RestaurantsList}/>*/}
-            <Route
-                path="/login"
-                render={(props) => (
-                    <Login {...props} login={login}/>
-                )}
-            />
             <Route path={'/about'} component={About}/>
             <Route path={'/our-partners'} component={OurPartners}/>
+            {/*<Route path={'/restaurants'} component={RestaurantsList}/>*/}
+            <AuthProvider> {/* Route'da karmaşıklık var -> /*/}
+                <Switch>
+                    <Container className={"d-flex align-items-center justify-content-center"}
+                               style={{minHeight: "100vh"}}>
+                        <div className={"w-100"} style={{maxWidth: "400px"}}>
+                            <Route exact path={"/dashboard"} component={Dashboard}/>
+                            <Route exact path={"/update-profile"} component={UpdateProfile}/>
+                            <Route path={"/signup"} component={Signup}/>
+                            <Route path={"/login"} component={Login}/>
+                            <Route path={"/forgot-password"} component={ForgotPassword}/>
+                        </div>
+                    </Container>
+                </Switch>
+            </AuthProvider>
             <Footer/>
         </div>
     );
