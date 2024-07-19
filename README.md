@@ -12,7 +12,6 @@ Orbit's Synthwave is a Retro Synthwave website replica created using the MERN (M
 - **Retro Design**: Aesthetic user interface inspired by the Synthwave era.
 - **MERN Stack**: Utilizes MongoDB for database, Express.js for backend, React.js for frontend, and Node.js for server.
 - **Responsive**: Fully responsive design for a seamless experience across various devices.
-- **[Add more features here]**
 
 ## Screenshots
 
