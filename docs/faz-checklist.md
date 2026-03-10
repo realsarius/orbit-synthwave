@@ -1,19 +1,20 @@
 # Faz Checklist
 
 ## Faz 0 - Blokaj Kapatma
-- [ ] Backend `start` komutunu `node index.js` yap
-- [ ] `dev` scriptine `nodemon index.js` ekle
-- [ ] `backend/.env.example` oluştur
-- [ ] Frontend API base URL'i env’den al
-- [ ] Frontend review endpoint’lerini backend ile eşleştir
-- [ ] Frontend build için toolchain uyumluluğunu çöz (Node/CRA)
+- [x] Backend `start` komutunu `node index.js` yap
+- [x] `dev` scriptine `nodemon index.js` ekle
+- [x] `backend/.env.example` oluştur
+- [x] Frontend API base URL'i env’den al
+- [x] Frontend review endpoint’lerini backend ile eşleştir
+- [x] Frontend build için toolchain uyumluluğunu çöz (Node/CRA)
 
 ## Faz 1 - REST ve Güvenlik
-- [ ] Endpoint’leri resource bazlı düzenle
-- [ ] Request validation katmanı ekle
-- [ ] Merkezi error middleware ekle
-- [ ] Auth token verify et, `user_id` body’den alma
-- [ ] HTTP status code standardını uygula
+- [x] Endpoint’leri resource bazlı düzenle
+- [x] Request validation katmanı ekle
+- [x] Merkezi error middleware ekle
+- [x] `user_id` bilgisini body yerine header’dan al
+- [ ] Auth token verify et (JWT/Firebase)
+- [x] HTTP status code standardını uygula
 
 ## Faz 2 - SOLID / Clean / DRY
 - [ ] `App.js` içindeki route-layout-auth sorumluluklarını ayır

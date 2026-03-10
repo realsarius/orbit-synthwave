@@ -1,5 +1,5 @@
 import mongodb from "mongodb"
-const ObjectId = mongodb.ObjectID
+const ObjectId = mongodb.ObjectId;
 let restaurants
 
 export default class RestaurantsDAO {
@@ -38,8 +38,7 @@ export default class RestaurantsDAO {
             cursor = await restaurants
                 .find(query)
         } catch (e) {
-            console.error(`Unable to issue find command, ${e}`)
-            return { restaurantsList: [], totalNumRestaurants: 0 }
+            throw new Error(`Unable to issue find command: ${e.message}`)
         }
 
         const displayCursor = cursor.limit(restaurantsPerPage).skip(restaurantsPerPage * page)
@@ -50,10 +49,7 @@ export default class RestaurantsDAO {
 
             return { restaurantsList, totalNumRestaurants }
         } catch (e) {
-            console.error(
-                `Unable to convert cursor to array or problem counting documents, ${e}`,
-            )
-            return { restaurantsList: [], totalNumRestaurants: 0 }
+            throw new Error(`Unable to convert cursor to array or count documents: ${e.message}`)
         }
     }
     static async getRestaurantByID(id) {
@@ -95,8 +91,7 @@ export default class RestaurantsDAO {
             ]
             return await restaurants.aggregate(pipeline).next()
         } catch (e) {
-            console.error(`Something went wrong in getRestaurantByID: ${e}`)
-            throw e
+            throw new Error(`Something went wrong in getRestaurantByID: ${e.message}`)
         }
     }
 
@@ -106,8 +101,7 @@ export default class RestaurantsDAO {
             cuisines = await restaurants.distinct("cuisine")
             return cuisines
         } catch (e) {
-            console.error(`Unable to get cuisines, ${e}`)
-            return cuisines
+            throw new Error(`Unable to get cuisines: ${e.message}`)
         }
     }
 }

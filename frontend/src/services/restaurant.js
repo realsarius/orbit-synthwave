@@ -6,23 +6,31 @@ class RestaurantDataService {
     }
 
     get(id) {
-        return http.get(`/restaurants/id/${id}`);
+        return http.get(`/restaurants/${id}`);
     }
 
     find(query, by = "name", page = 0) {
         return http.get(`/restaurants?${by}=${query}&page=${page}`);
     }
 
-    createReview(data) {
-        return http.post("/restaurants/review", data);
+    createReview(restaurantId, data) {
+        const { user_id: userId, ...payload } = data;
+        return http.post(`/restaurants/${restaurantId}/reviews`, payload, {
+            headers: { "x-user-id": userId },
+        });
     }
 
-    updateReview(data) {
-        return http.put("/restaurants/review", data);
+    updateReview(reviewId, data) {
+        const { user_id: userId, ...payload } = data;
+        return http.put(`/reviews/${reviewId}`, payload, {
+            headers: { "x-user-id": userId },
+        });
     }
 
     deleteReview(id, userId) {
-        return http.delete(`/restaurants/review?id=${id}`, { data: { user_id: userId } });
+        return http.delete(`/reviews/${id}`, {
+            headers: { "x-user-id": userId },
+        });
     }
 
     getCuisines() {

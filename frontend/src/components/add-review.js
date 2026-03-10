@@ -20,16 +20,14 @@ const AddReview = props => {
     };
 
     const saveReview = () => {
-        var data = {
+        const data = {
             text: review,
             name: props.user.name,
             user_id: props.user.id,
-            restaurant_id: props.match.params.id
         };
 
         if (editing) {
-            data.review_id = props.location.state.currentReview._id
-            RestaurantDataService.updateReview(data)
+            RestaurantDataService.updateReview(props.location.state.currentReview._id, data)
                 .then(response => {
                     setSubmitted(true);
                     console.log(response.data);
@@ -38,7 +36,7 @@ const AddReview = props => {
                     console.log(e);
                 });
         } else {
-            RestaurantDataService.createReview(data)
+            RestaurantDataService.createReview(props.match.params.id, data)
                 .then(response => {
                     setSubmitted(true);
                     console.log(response.data);
