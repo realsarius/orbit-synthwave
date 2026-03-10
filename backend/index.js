@@ -1,14 +1,19 @@
 import app from "./server.js";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import mongodb from "mongodb";
-import RestaurantsDAO from "../backend/dao/restaurantsDAO.js";
+import RestaurantsDAO from "./dao/restaurantsDAO.js";
 import ReviewsDAO from "./dao/reviewsDAO.js";
 
 dotenv.config();
 
 const MongoClient = mongodb.MongoClient;
 const port = process.env.PORT || 8000;
+const mongoUri = process.env.RESTREVIEWS_DB_URI;
+
+if (!mongoUri) {
+    console.error("Missing RESTREVIEWS_DB_URI. Add it to backend/.env or your shell environment.");
+    process.exit(1);
+}
 
 // mongoose.connect(process.env.RESTREVIEWS_DB_URI,
 //     {
@@ -18,7 +23,7 @@ const port = process.env.PORT || 8000;
 //     });
 
 MongoClient.connect(
-    process.env.RESTREVIEWS_DB_URI,
+    mongoUri,
     {
         maxPoolSize: 50,
         wtimeoutMS: 2500,
