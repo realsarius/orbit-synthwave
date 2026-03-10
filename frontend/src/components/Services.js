@@ -1,6 +1,6 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPencilAlt, faUsers, faChartArea, faGlobe, faFlag, faChartBar} from "@fortawesome/free-solid-svg-icons";
+import {faPencil, faUsers, faChartArea, faGlobe, faFlag, faChartBar} from "@fortawesome/free-solid-svg-icons";
 
 const Services = () => {
     return (
@@ -17,7 +17,7 @@ const Services = () => {
                 </div>
                 <div className="card border-secondary m-3 col-md-3">
                     {/*<i className="fas fa-pencil-alt p-3 text-bigger"></i>*/}
-                    <FontAwesomeIcon icon={faPencilAlt}/>
+                    <FontAwesomeIcon icon={faPencil}/>
                     <div className="card-body">
                         <h4 className="card-title">UX Designs</h4>
                         <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id arcu
