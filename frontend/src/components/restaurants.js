@@ -16,10 +16,9 @@ const Restaurant = props => {
         RestaurantDataService.get(id)
             .then(response => {
                 setRestaurant(response.data);
-                console.log(response.data);
             })
-            .catch(e => {
-                console.log(e);
+            .catch(() => {
+                setRestaurant(null);
             });
     };
 
@@ -29,17 +28,15 @@ const Restaurant = props => {
 
     const deleteReview = (reviewId, index) => {
         RestaurantDataService.deleteReview(reviewId, props.user.id)
-            .then(response => {
+            .then(() => {
                 setRestaurant((prevState) => {
-                    prevState.reviews.splice(index, 1)
-                    return ({
-                        ...prevState
-                    })
+                    return {
+                        ...prevState,
+                        reviews: prevState.reviews.filter((_, reviewIndex) => reviewIndex !== index),
+                    };
                 })
             })
-            .catch(e => {
-                console.log(e);
-            });
+            .catch(() => {});
     };
 
     return (
@@ -69,8 +66,13 @@ const Restaurant = props => {
                                                 </p>
                                                 {props.user && props.user.id === review.user_id &&
                                                 <div className="row">
-                                                    <a onClick={() => deleteReview(review._id, index)}
-                                                       className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</a>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => deleteReview(review._id, index)}
+                                                        className="btn btn-primary col-lg-5 mx-1 mb-1"
+                                                    >
+                                                        Delete
+                                                    </button>
                                                     <Link to={{
                                                         pathname: "/restaurants/" + props.match.params.id + "/review",
                                                         state: {

@@ -28,22 +28,16 @@ const AddReview = props => {
 
         if (editing) {
             RestaurantDataService.updateReview(props.location.state.currentReview._id, data)
-                .then(response => {
+                .then(() => {
                     setSubmitted(true);
-                    console.log(response.data);
                 })
-                .catch(e => {
-                    console.log(e);
-                });
+                .catch(() => {});
         } else {
             RestaurantDataService.createReview(props.match.params.id, data)
-                .then(response => {
+                .then(() => {
                     setSubmitted(true);
-                    console.log(response.data);
                 })
-                .catch(e => {
-                    console.log(e);
-                });
+                .catch(() => {});
         }
 
     };

@@ -5,14 +5,15 @@ import App from './App';
 // import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
 import './css/bootstrap.css'
-import 'fontawesome/index';
 import './css/style.css';
 import './js/app';
-import {AuthProvider} from "./context/AuthProvider";
+import {AuthProvider} from "./contexts/AuthContext";
 
 ReactDOM.render(
     <BrowserRouter>
-        <App/>
+        <AuthProvider>
+            <App/>
+        </AuthProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );

@@ -33,24 +33,20 @@ const RestaurantsList = props => {
     const retrieveRestaurants = () => {
         RestaurantDataService.getAll()
             .then(response => {
-                console.log(response.data);
                 setRestaurants(response.data.restaurants);
-
             })
-            .catch(e => {
-                console.log(e);
+            .catch(() => {
+                setRestaurants([]);
             });
     };
 
     const retrieveCuisines = () => {
         RestaurantDataService.getCuisines()
             .then(response => {
-                console.log(response.data);
                 setCuisines(["All Cuisines"].concat(response.data));
-
             })
-            .catch(e => {
-                console.log(e);
+            .catch(() => {
+                setCuisines(["All Cuisines"]);
             });
     };
 
@@ -61,11 +57,10 @@ const RestaurantsList = props => {
     const find = (query, by) => {
         RestaurantDataService.find(query, by)
             .then(response => {
-                console.log(response.data);
                 setRestaurants(response.data.restaurants);
             })
-            .catch(e => {
-                console.log(e);
+            .catch(() => {
+                setRestaurants([]);
             });
     };
 
@@ -124,9 +119,10 @@ const RestaurantsList = props => {
             </div>
             <div className="row pt-3">
                 {restaurants.map((restaurant) => {
-                    const address = `${restaurant.address.building} ${restaurant.address.streetView}, ${restaurant.address.zipcode}`;
+                    const street = restaurant.address.street || restaurant.address.streetView || "";
+                    const address = `${restaurant.address.building} ${street}, ${restaurant.address.zipcode}`;
                     return (
-                        <div className="col-lg-4 pb-1">
+                        <div className="col-lg-4 pb-1" key={restaurant._id}>
                             <div className="card">
                                 <div className="card-body">
                                     <h5 className="card-title">{restaurant.name}</h5>
@@ -139,7 +135,7 @@ const RestaurantsList = props => {
                                               className="btn btn-primary col-lg-5 mx-1 mb-1">
                                             View Reviews
                                         </Link>
-                                        <a target="_blank" href={"https://www.google.com/maps/place/" + address}
+                                        <a target="_blank" rel="noreferrer" href={"https://www.google.com/maps/place/" + address}
                                            className="btn btn-primary col-lg-5 mx-1 mb-1">View Map</a>
                                     </div>
                                 </div>
