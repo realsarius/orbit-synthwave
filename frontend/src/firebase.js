@@ -1,5 +1,5 @@
-import {initializeApp} from "firebase/app";
-import {getAuth} from "firebase/auth"
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { readEnv } from "./env";
 
 const firebaseConfig = {
@@ -11,7 +11,14 @@ const firebaseConfig = {
     appId: readEnv("VITE_FIREBASE_APP_ID", "REACT_APP_FIREBASE_APP_ID", "REACT_APP_FIRABASE_APP_ID")
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export let auth = null;
+export let authInitError = null;
 
-export const auth = getAuth(app);
+try {
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+} catch (error) {
+    authInitError = error;
+    // Keep app bootable even if auth is misconfigured (useful for demo/screenshot flows).
+    console.warn("Firebase auth is disabled:", error?.message || error);
+}
